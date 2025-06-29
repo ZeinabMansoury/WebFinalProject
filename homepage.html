@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerConnect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header>
+        <div><strong>CareerConnect</strong></div>
+        <div class="right-side">
+            <nav>
+                <a href="#">Home</a>
+                <a href="#">Job Opportunities</a>
+                <a href="#">Companies</a>
+            </nav>
+            <div class="auth-buttons">
+                <button class="login" id="login">Login</button>
+                <button class="register" id="signup">Register</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <div class="image-wrapper">
+                <img src="./image/image.png" alt="">
+                <div class="text-overlay">
+                    <p>Find Your Dream</p>
+                    <div class="buttons">
+                        <button class="employer">Employers</button>
+                        <button class="seeker">Seekers</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="search-section">
+            <input type="text" placeholder="Search jobs...">
+        </section>
+
+        <section class="job-listings">
+          <h3>New Job Listings</h3>
+
+          <div class="job-card">
+            <div class="job-info">
+              <small>Featured</small>
+              <h4>Software Engineer</h4>
+              <small>Tech Innovators Inc. - Remote</small>
+              <br>
+              <button class="apply-btn">Apply Now</button>
+            </div>
+            <img src="logo1.png" alt="Company Logo" width="140" />
+          </div      >
+
+          <div class="job-card">
+            <div class="job-info">
+              <small>Featured</small>
+              <h4>Marketing Manager</h4>
+              <small>Global Marketing Solutions - New York, NY</small>
+              <br>
+              <button class="apply-btn">Apply Now</button>
+            </div>
+            <img src="logo2.png" alt="Company Logo" width="140" />
+          </div      >
+
+          <div class="job-card">
+            <div class="job-info">
+              <small>Featured</small>
+              <h4>Data Analyst</h4>
+              <small>Data Insights Corp. - San Francisco, CA</small>
+              <br>
+              <button class="apply-btn">Apply Now</button>
+            </div>
+            <img src="logo3.png" alt="Company Logo" width="140" />
+          </div>
+        </section>
+
+        <section class="cta">
+           <h2>Ready to find your next opportunity?</h2>
+           <button>Register Now</button>
+         </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
