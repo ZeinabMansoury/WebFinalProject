@@ -23,9 +23,16 @@
     </header>
 
     <div class="login-container">
-        <h2>Login</h2>
+        <h2>Login to your Account</h2>
 
         <form id="loginForm" novalidate>
+            <div class="role-buttons">
+                <button class="role-btn active" data-role="seeker">Job Seeker</button>
+                <button class="role-btn" data-role="employer">Employer</button>
+            </div>
+
+            <input type="hidden" id="userRole" name="userRole" value="seeker">
+
             <div class="form-group">
                 <input type="text" id="email" name="email" placeholder="Username or Email">
                 <small class="error" id="emailError"></small>

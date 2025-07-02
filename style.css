@@ -51,15 +51,19 @@ nav a:hover {
     cursor: pointer;
 }
 
-.login {
+.auth-buttons .login {
     background-color: #007bff;
     color: white;
 }
 
-.register {
+.auth-buttons .register {
     background-color: white;
     color: #007bff;
     border: 1px solid #000;
+}
+
+.auth-buttons .register:hover {
+  background-color: #f8f9fa;
 }
 
 
@@ -174,7 +178,7 @@ nav a:hover {
     }
 
 
-    /* login form */
+    /* login and signup form */
     .login-container {
       max-width: 400px;
       margin: 4rem auto;
@@ -212,6 +216,11 @@ nav a:hover {
       font-size: 14px;
     }
 
+    input:focus {
+      outline: none;
+      border-color: #1a73e8;
+    }
+
     .role-buttons {
       display: flex;
       gap: 10px;
@@ -233,16 +242,24 @@ nav a:hover {
     }
 
     .role-btn.active {
-            background: #e7f0fd;
-            border-color: #1a73e8;
-            color: #1a73e8;
+      background-color: #e7f0fd;
+      border-color: #1a73e8;
+      color: #1a73e8;
+    }
+
+    .forget {
+      text-align: right;
+      margin-bottom: 20px;
     }
 
     .forget a {
-        text-align: left;
         font-size: 14px;
         color: #5c5c5c;
         text-decoration: none;
+    }
+
+    .forget a:hover {
+      text-decoration: underline;
     }
 
     input.error-field {
@@ -264,7 +281,13 @@ nav a:hover {
       opacity: 0.9; 
     }
 
+    .sign-in-btn:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+
     .footer-link {
+      text-align: center;
       margin-top: 20px;
       font-size: 14px;
       color: #606060;
@@ -276,7 +299,7 @@ nav a:hover {
     }
 
     .footer-link a:hover {
-            text-decoration: underline;
+      text-decoration: underline;
     }
 
     .error {
@@ -286,16 +309,15 @@ nav a:hover {
       margin-top: 4px;
     }
 
-    
     .error.show { 
       display: block; 
     }
 
     .success-message {
-            text-align: center;
-            color: #28a745;
-            margin-top: 20px;
-            display: none;
+      text-align: center;
+      color: #28a745;
+      margin-top: 20px;
+      display: none;
     }
 
     .loading {
