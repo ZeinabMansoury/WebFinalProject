@@ -59,7 +59,7 @@ nav a:hover {
 .auth-buttons .register {
     background-color: white;
     color: #007bff;
-    border: 1px solid #000;
+    border: 1px solid #007bff;
 }
 
 .auth-buttons .register:hover {
@@ -102,15 +102,38 @@ nav a:hover {
     font-weight: bold;
 }
 
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
 .buttons button {
-    display: inline-block;
-    padding: 12px 25px;
-    margin-top: 20px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 8px;
-    border: none;
-    font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+}
+
+.buttons .employer {
+  background-color: #1a73e8;
+  color: white;
+}
+
+.buttons .employer:hover {
+  background-color: #0d62c9;
+}
+
+.buttons .seeker {
+  background-color: white;
+  color: #1a73e8;
+}
+
+.buttons .seeker:hover {
+  background-color: #f8f9fa;
 }
 
 

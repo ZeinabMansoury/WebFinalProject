@@ -1,68 +1,70 @@
-document.getElementById('login').onclick = function() {
-    window.location.href = 'login.html'
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("loginForm");
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
-    const emailError = document.getElementById("emailError");
-    const passwordError = document.getElementById("passwordError");
-
-    const isValidEmail = (value) => 
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        [emailError, passwordError].forEach((el) => {
-            el.textContent = "";
-            el.classList.remove("show");
-        });
-        [emailInput, passwordInput].forEach((inp) =>
-            inp.classList.remove("error-field")
-        );
-
-        let hasError = false;
-
-        const emailVal = emailInput.value.trim();
-        if (!emailVal) {
-          emailError.textContent = "ایمیل یا نام کاربری را وارد کنید.";
-          emailError.classList.add("show");
-          emailInput.classList.add("error-field");
-          hasError = true;
-        } else if (!isValidEmail(emailVal) && !emailVal.includes(" ")) {
-          emailError.textContent = "فرمت ایمیل معتبر نیست.";
-          emailError.classList.add("show");
-          emailInput.classList.add("error-field");
-          hasError = true;
-        }
-
-
-        const passVal = passwordInput.value.trim();
-        if (!passVal) {
-          passwordError.textContent = "رمز عبور را وارد کنید.";
-          passwordError.classList.add("show");
-          passwordInput.classList.add("error-field");
-          hasError = true;
-        } else if (passVal.length < 6) {
-          passwordError.textContent = "رمز باید حداقل ۶ کاراکتر باشد.";
-          passwordError.classList.add("show");
-          passwordInput.classList.add("error-field");
-          hasError = true;
-        }
-
-
-        if (!hasError) {
-          emailInput.disabled = passwordInput.disabled = true;
-          const btn = form.querySelector("button");
-          btn.textContent = "Signing in…";
-          btn.disabled = true;
+// script.js - برای همه صفحات مشترک است
+document.addEventListener('DOMContentLoaded', function() {
+    // بررسی وجود عناصر در صفحه
+    const employerBtn = document.getElementById('employerBtn');
+    const seekerBtn = document.getElementById('seekerBtn');
+    const loginBtn = document.getElementById('login');
+    const signupBtn = document.getElementById('signup');
+    const ctaRegisterBtn = document.getElementById('ctaRegister');
     
-          setTimeout(() => {
-            alert("Login successful!");
-            window.location.href = "dashboard.html"; 
-          }, 1000);
+    // مدیریت دکمه‌های صفحه اصلی
+    if (employerBtn && seekerBtn) {
+        employerBtn.addEventListener('click', function() {
+            window.location.href = 'login.html?role=employer';
+        });
+        
+        seekerBtn.addEventListener('click', function() {
+            window.location.href = 'login.html?role=seeker';
+        });
+    }
+    
+    // مدیریت دکمه‌های لاگین/ثبت‌نام در هدر
+    if (loginBtn) {
+        loginBtn.addEventListener('click', function() {
+            window.location.href = 'login.html';
+        });
+    }
+    
+    if (signupBtn || ctaRegisterBtn) {
+        const registerHandler = function() {
+            window.location.href = 'signup.html';
+        };
+        
+        if (signupBtn) signupBtn.addEventListener('click', registerHandler);
+        if (ctaRegisterBtn) ctaRegisterBtn.addEventListener('click', registerHandler);
+    }
+    
+    // مدیریت نقش‌ها در صفحه لاگین
+    const roleButtons = document.querySelectorAll('.role-btn');
+    const userRoleInput = document.getElementById('userRole');
+    
+    if (roleButtons.length > 0 && userRoleInput) {
+        // دریافت پارامتر role از URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const role = urlParams.get('role');
+        
+        // تنظیم نقش پیش‌فرض
+        roleButtons.forEach(btn => {
+            if (btn.dataset.role === role) {
+                btn.classList.add('active');
+                userRoleInput.value = role;
+            }
+            
+            // مدیریت کلیک روی دکمه‌های نقش
+            btn.addEventListener('click', function() {
+                roleButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                userRoleInput.value = this.dataset.role;
+            });
+        });
+        
+        // اگر نقشی انتخاب نشده، پیش‌فرض seeker باشد
+        if (!role && userRoleInput.value === '') {
+            const defaultBtn = document.querySelector('.role-btn[data-role="seeker"]');
+            if (defaultBtn) {
+                defaultBtn.classList.add('active');
+                userRoleInput.value = 'seeker';
+            }
         }
-    })
-})
+    }
+});

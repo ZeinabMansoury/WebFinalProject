@@ -27,11 +27,11 @@
 
         <form id="loginForm" novalidate>
             <div class="role-buttons">
-                <button class="role-btn active" data-role="seeker">Job Seeker</button>
-                <button class="role-btn" data-role="employer">Employer</button>
+                <button type="button" class="role-btn" data-role="seeker" id="seekerBtn">Job Seeker</button>
+                <button class="role-btn" data-role="employer" id="employerBtn">Employer</button>
             </div>
 
-            <input type="hidden" id="userRole" name="userRole" value="seeker">
+            <input type="hidden" id="userRole" name="userRole" value="">
 
             <div class="form-group">
                 <input type="text" id="email" name="email" placeholder="Username or Email">
@@ -52,7 +52,7 @@
 
         <div class="footer-link">
             New to CareerConnect?
-            <a href="#">Join now</a>
+            <a href="./signup.html">Join now</a>
         </div>
     </div>
 
