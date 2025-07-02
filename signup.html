@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header>
+        <div><strong>CareerConnect</strong></div>
+        <div class="right-side">
+            <nav>
+                <a href="#">Home</a>
+                <a href="#">Job Opportunities</a>
+                <a href="#">Companies</a>
+            </nav>
+            <div class="auth-buttons">
+                <button class="login">Login</button>
+                <button class="register">Register</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="login-container">
+        <h2>Creat Your Account</h2>
+
+        <form id="signupForm" novalidate>
+            <div class="form-group">
+                <input type="text" id="username" name="username" placeholder="Username">
+                <small class="error" id="usernameError"></small>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name">
+                    <small class="error" id="firstNameError"></small>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" id="lastName" name="lastName" placeholder="Last Name">
+                    <small class="error" id="lastNameError"></small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="email" id="email" name="email" placeholder="Email">
+                <small class="error" id="emailError"></small>
+            </div>
+
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder="Password">
+                <small class="error" id="passwordError"></small>
+            </div>
+
+            <div class="form-group">
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
+                <small class="error" id="confirmPasswordError"></small>
+            </div>
+
+            <div class="role-buttons">
+                <button type="button" class="role-btn" data-role="employer">Employer</button>
+                <button type="button" class="role-btn" data-role="seeker">Job Seeker</button>
+            </div>
+
+            <input type="hidden" id="userRole" name="userRole" value="">
+
+            <button type="submit" class="sign-in-btn" id="submitBtn">
+                <span id="submitText">Register</span>
+                <span id="submitSpinner" class="loading" style="display: none;"></span>
+            </button>
+
+            <div class="success-message" id="successMessage">
+                Registration successful! Redirecting to login...
+            </div>
+        </form>
+
+        <div class="footer-link">
+            Already have an account?
+            <a href="">Sign in</a>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
