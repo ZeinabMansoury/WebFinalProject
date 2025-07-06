@@ -468,12 +468,16 @@ nav a:hover {
       margin-bottom: 20px;
     }
     .resume-box .upload-btn {
-      background: #f3f4f6;
+      background: #007bff;
       border: none;
       padding: 10px 20px;
       border-radius: 8px;
       font-weight: 500;
       cursor: pointer;
+    }
+
+    .resume-box .upload-btn:hover {
+      background-color: #0d62c9;
     }
 
     .empty-state {
@@ -483,4 +487,17 @@ nav a:hover {
       border: 2px dashed #e5e7eb;
       border-radius: 12px;
       margin-top: 20px;
+    }
+
+
+    /* Employer Dashboard */
+    .new-job-btn {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 30px;
     }
