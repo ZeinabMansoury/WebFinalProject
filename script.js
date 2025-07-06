@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+
     const employerBtn = document.getElementById('employerBtn');
     const seekerBtn = document.getElementById('seekerBtn');
     const loginBtn = document.getElementById('login');
@@ -30,11 +31,17 @@ document.addEventListener('DOMContentLoaded', function() {
         if (ctaRegisterBtn) ctaRegisterBtn.addEventListener('click', registerHandler);
     }
 
+
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         const roleButtons = document.querySelectorAll('.role-btn');
         const userRoleInput = document.getElementById('userRole');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
         
+
         const urlParams = new URLSearchParams(window.location.search);
         const roleParam = urlParams.get('role');
         
@@ -46,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
             userRoleInput.value = 'seeker';
         }
         
+
         roleButtons.forEach(btn => {
             btn.addEventListener('click', function() {
                 roleButtons.forEach(b => b.classList.remove('active'));
@@ -54,19 +62,49 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
+
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
+
+            emailError.textContent = '';
+            passwordError.textContent = '';
+            
+            let isValid = true;
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
             const role = userRoleInput.value;
             
-            if (!email || !password || !role) {
-                alert('لطفاً تمام فیلدها را پر کنید و نقش خود را انتخاب نمایید');
-                return;
+
+            if (!email) {
+                emailError.textContent = 'Username or email is required';
+                isValid = false;
             }
             
-            console.log('ورود با:', { email, password, role });
+
+            if (!password) {
+                passwordError.textContent = 'Password is required';
+                isValid = false;
+            } else if (password.length < 6) {
+                passwordError.textContent = 'Password must be at least 6 characters';
+                isValid = false;
+            }
+            
+
+            if (!role) {
+                alert('Please select your role (Job Seeker or Employer)');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                console.log('Log attempt with:', {email, password, role});
+                
+                if (role === 'employer') {
+                    window.location.href = 'employer_dashboard.html';
+                } else if (role === 'seeker') {
+                    window.location.href = 'seeker_dashboard.html';
+                }
+            }
         });
     }
 
@@ -91,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             
             submitBtn.disabled = true;
-            submitText.textContent = 'در حال پردازش...';
+            submitText.textContent = 'Processing...';
             submitSpinner.style.display = 'inline-block';
             
             const formData = {
@@ -99,16 +137,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 firstName: document.getElementById('firstName').value.trim(),
                 lastName: document.getElementById('lastName').value.trim(),
                 email: document.getElementById('email').value.trim(),
-                password: document.getElementById('password').value,
-                confirmPassword: document.getElementById('confirmPassword').value,
+                password: document.getElementById('password').value.trim(),
+                confirmPassword: document.getElementById('confirmPassword').value.trim(),
                 role: userRoleInput.value
             };
             
             const errors = validateSignupForm(formData);
             if (errors.length > 0) {
-                alert(errors.join('\n'));
+                showSignupErrors(errors);
                 submitBtn.disabled = false;
-                submitText.textContent = 'ثبت نام';
+                submitText.textContent = 'Register';
                 submitSpinner.style.display = 'none';
                 return;
             }
@@ -123,46 +161,71 @@ document.addEventListener('DOMContentLoaded', function() {
                     window.location.href = `login.html?role=${formData.role}`;
                 }, 2000);
             } catch (error) {
-                console.error('خطا در ثبت نام:', error);
-                alert('خطایی در ثبت نام رخ داد. لطفاً مجدداً تلاش کنید.');
+                console.error('Registration error:', error);
+                alert('An error occurred during registration. Please try again.');
                 submitBtn.disabled = false;
-                submitText.textContent = 'ثبت نام';
+                submitText.textContent = 'Register';
                 submitSpinner.style.display = 'none';
             }
         });
         
         function validateSignupForm(data) {
             const errors = [];
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             
             if (!data.username || data.username.length < 4) {
-                errors.push('نام کاربری باید حداقل ۴ کاراکتر باشد');
+                errors.push({ field: 'username', message: 'Username must be at least 4 characters' });
             }
             
             if (!data.firstName) {
-                errors.push('لطفاً نام خود را وارد کنید');
+                errors.push({ field: 'firstName', message: 'First name is required' });
             }
             
             if (!data.lastName) {
-                errors.push('لطفاً نام خانوادگی خود را وارد کنید');
+                errors.push({ field: 'lastName', message: 'Last name is required' });
             }
             
-            if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-                errors.push('لطفاً یک ایمیل معتبر وارد کنید');
+            if (!data.email) {
+                errors.push({ field: 'email', message: 'Email is required' });
+            } else if (!emailRegex.test(data.email)) {
+                errors.push({ field: 'email', message: 'Please enter a valid email address' });
             }
             
-            if (!data.password || data.password.length < 8) {
-                errors.push('رمز عبور باید حداقل ۸ کاراکتر باشد');
+            if (!data.password) {
+                errors.push({ field: 'password', message: 'Password is required' });
+            } else if (data.password.length < 8) {
+                errors.push({ field: 'password', message: 'Password must be at least 8 characters' });
             }
             
-            if (data.password !== data.confirmPassword) {
-                errors.push('رمزهای عبور وارد شده مطابقت ندارند');
+            if (!data.confirmPassword) {
+                errors.push({ field: 'confirmPassword', message: 'Please confirm your password' });
+            } else if (data.password !== data.confirmPassword) {
+                errors.push({ field: 'confirmPassword', message: 'Passwords do not match' });
             }
             
             if (!data.role) {
-                errors.push('لطفاً نقش خود را انتخاب کنید');
+                errors.push({ field: 'role', message: 'Please select your role' });
             }
             
             return errors;
+        }
+        
+
+        function showSignupErrors(errors) {
+            document.querySelectorAll('.error').forEach(el => {
+                el.textContent = '';
+            });
+            
+            errors.forEach(error => {
+                if (error.field === 'role') {
+                    alert(error.message);
+                } else {
+                    const errorElement = document.getElementById(`${error.field}Error`);
+                    if (errorElement) {
+                        errorElement.textContent = error.message;
+                    }
+                }
+            });
         }
     }
 });
