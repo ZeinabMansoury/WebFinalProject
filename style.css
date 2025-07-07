@@ -362,7 +362,7 @@ nav a:hover {
     }
 
     /* seeker dashboard */
-    .welcome {
+    .title {
       font-size: 26px;
       font-weight: 700;
       margin: 40px 0;
@@ -494,4 +494,91 @@ nav a:hover {
       font-weight: 600;
       cursor: pointer;
       margin-top: 30px;
+    }
+
+    /* creat job page */
+    label {
+      display: block;
+      margin: 1rem 0 0.5rem;
+      font-weight: 500;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    select,
+    textarea {
+        width: 100%;
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+}
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="url"]:focus,
+    select:focus,
+    textarea:focus {
+        border-color: #1a73e8;
+        outline: none;
+}
+    
+    textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+    
+    .inline-inputs {
+        display: flex;
+        gap: 1rem;
+    }
+    
+    .inline-inputs input {
+        flex: 1;
+    }
+    
+    .upload-box {
+        border: 2px dashed #ddd;
+        border-radius: 4px;
+        padding: 2rem;
+        text-align: center;
+        margin-bottom: 1rem;
+        background: #f9f9f9;
+    }
+    
+    .upload-box p {
+        color: #666;
+        margin-bottom: 1rem;
+    }
+    
+    .upload-box button {
+        background: #007bff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+    
+    .upload-box button:hover {
+        background-color: #0d62c9;
+    }
+    
+    .submit-btn {
+        background: #2563eb;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 30px;
+    }
+    
+    .submit-btn:hover {
+        background: #0d62c9;
     }

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creat job</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+
+    <header>
+        <div><strong>CareerConnect</strong></div>
+        <div class="right-side">
+            <nav>
+                <a href="#">Home</a>
+                <a href="#">Job Opportunities</a>
+                <a href="#">Companies</a>
+            </nav>
+            <div class="avatar" style="width: 32px; height: 32px; background: #ccc; border-radius: 50%;"></div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="title">Post a job</h1>
+
+        <label>Job title</label>
+        <input type="text" placeholder="e.g. Software Engineer">
+
+        <label>Full description</label>
+        <textarea placeholder="type job description here..."></textarea>
+
+        <label>Job type</label>
+        <select>
+            <option>Select</option>
+            <option>Full-time</option>
+            <option>Part-time</option>
+            <option>Contract</option>
+        </select>
+
+        <label>Location</label>
+        <input type="text" placeholder="e.g. Remote, New York NY">
+
+        <label>Salary range</label>
+        <div class="inline-inputs">
+            <input type="text" placeholder="Minimum">
+            <input type="text" placeholder="Maximum">
+        </div>
+
+        <label>Requred skills</label>
+        <input type="text" placeholder="e.g. Java, python, SQL">
+
+        <label>Experience level</label>
+        <select>
+            <option>Select</option>
+            <option>Entry</option>
+            <option>Mid</option>
+            <option>Senior</option>
+        </select>
+
+        <label>Company name</label>
+        <input type="text" placeholder="company name">
+
+        <label>Website (optional)</label>
+        <input type="url" placeholder="company website">
+
+        <label>Contact email</label>
+        <input type="email" placeholder="company email">
+
+        <label>Upload Company Logo (optional)</label>
+        <div class="upload-box">
+            <p>Drag and drop or browse to upload</p>
+            <button>Upload</button>
+        </div>
+
+        <button class="submit-btn">Post job</button>
+    </div>
+</body>
+</html>
