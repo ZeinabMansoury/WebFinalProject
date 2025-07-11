@@ -239,4 +239,67 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = 'employer_dashboard.html';
         });
     }
+
+        // ==================== Forget Password & Email Verification ====================
+    const forgetPasswordForm = document.querySelector('.forget-input');
+    const sendRecoveryBtn = document.querySelector('.send-link-btn');
+    const resendVerificationBtn = document.querySelector('.btn');
+
+    if (forgetPasswordForm && sendRecoveryBtn) {
+        sendRecoveryBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const email = forgetPasswordForm.value.trim();
+            
+            if (!email || !email.includes('@')) {
+                alert('لطفاً یک ایمیل معتبر وارد کنید');
+                return;
+            }
+
+            sendRecoveryBtn.disabled = true;
+            sendRecoveryBtn.textContent = 'Sending...';
+            
+            setTimeout(() => {
+                sessionStorage.setItem('pendingRecoveryEmail', email);
+                
+                window.location.href = 'email_varification.html';
+            }, 1500);
+        });
+    }
+
+    if (resendVerificationBtn) {
+        const pendingEmail = sessionStorage.getItem('pendingRecoveryEmail');
+        if (pendingEmail) {
+            const verificationText = document.querySelector('.varification-text');
+            if (verificationText) {
+                verificationText.innerHTML = `We've sent a password recovery link to <strong>${pendingEmail}</strong>. Please check your inbox.`;
+            }
+        }
+
+        resendVerificationBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            resendVerificationBtn.disabled = true;
+            resendVerificationBtn.textContent = 'Sending...';
+            
+            setTimeout(() => {
+                alert('Recovery link has been resent successfully!');
+                resendVerificationBtn.disabled = false;
+                resendVerificationBtn.textContent = 'Resend Verification Email';
+                
+                let countdown = 60;
+                const originalText = resendVerificationBtn.textContent;
+                
+                const timer = setInterval(() => {
+                    resendVerificationBtn.textContent = `Resend in ${countdown}s`;
+                    countdown--;
+                    
+                    if (countdown < 0) {
+                        clearInterval(timer);
+                        resendVerificationBtn.textContent = originalText;
+                    }
+                }, 1000);
+            }, 1000);
+        });
+    }
 });
