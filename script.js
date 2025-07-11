@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const emailError = document.getElementById('emailError');
         const passwordError = document.getElementById('passwordError');
         
-
         const urlParams = new URLSearchParams(window.location.search);
         const roleParam = urlParams.get('role');
         
@@ -53,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
             userRoleInput.value = 'seeker';
         }
         
-
         roleButtons.forEach(btn => {
             btn.addEventListener('click', function() {
                 roleButtons.forEach(b => b.classList.remove('active'));
@@ -62,11 +60,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-
             emailError.textContent = '';
             passwordError.textContent = '';
             
@@ -75,13 +71,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = passwordInput.value.trim();
             const role = userRoleInput.value;
             
-
             if (!email) {
                 emailError.textContent = 'Username or email is required';
                 isValid = false;
             }
             
-
             if (!password) {
                 passwordError.textContent = 'Password is required';
                 isValid = false;
@@ -90,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 isValid = false;
             }
             
-
             if (!role) {
                 alert('Please select your role (Job Seeker or Employer)');
                 isValid = false;
@@ -107,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
 
     const signupForm = document.getElementById('signupForm');
     if (signupForm) {
@@ -210,7 +204,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return errors;
         }
         
-
         function showSignupErrors(errors) {
             document.querySelectorAll('.error').forEach(el => {
                 el.textContent = '';
@@ -227,5 +220,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
+    }
+
+
+    const newJobBtn = document.querySelector('.new-job-btn');
+    if (newJobBtn) {
+        newJobBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'creat_job.html';
+        });
+    }
+
+    const jobForm = document.getElementById('jobForm');
+    if (jobForm) {
+        jobForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Job post created successfully!');
+            window.location.href = 'employer_dashboard.html';
+        });
     }
 });
