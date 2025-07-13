@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Job</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <div class="edit-job-container">
+      <h1 class="edit-job-title">Edit Job Post</h1>
+  
+      <div class="form-group">
+        <label class="form-label">Job Title</label>
+        <input type="text" class="form-control" placeholder="e.g. Senior Python Developer" value="Senior Python Developer">
+      </div>
+  
+      <div class="form-group">
+        <label class="form-label">Job Description</label>
+        <textarea class="form-control" placeholder="Detailed job description...">We are seeking a highly skilled Senior Python Developer to join our dynamic team. The ideal candidate will have extensive experience in developing and maintaining robust, scalable applications.</textarea>
+      </div>
+  
+      <div class="form-group">
+        <label class="form-label">Job Type</label>
+        <input type="text" class="form-control" placeholder="e.g. Full-time" value="Full-time">
+      </div>
+  
+      <div class="form-group">
+        <label class="form-label">Location</label>
+        <input type="text" class="form-control" placeholder="e.g. Remote, Tehran" value="Tehran - Vali Asr Square">
+      </div>
+  
+      <div class="checkbox-group">
+        <input type="checkbox" id="remote" checked>
+        <label for="remote">Remote work available</label>
+      </div>
+  
+      <div class="form-group">
+        <label class="form-label">Salary Range</label>
+        <div class="inline-inputs">
+          <input type="text" class="form-control" placeholder="Minimum" value="$3,000">
+          <input type="text" class="form-control" placeholder="Maximum" value="$5,000">
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label class="form-label">Required Skills</label>
+        <input type="text" class="form-control" placeholder="e.g. Python, Django, PostgreSQL" value="Python, Django, PostgreSQL, AWS">
+      </div>
+  
+      <div class="form-group">
+        <label class="form-label">Experience Level</label>
+        <input type="text" class="form-control" placeholder="e.g. Mid-Level" value="Senior Level">
+      </div>
+  
+      <div class="form-group">
+        <label class="form-label">Expiry Date</label>
+        <input type="date" class="form-control" value="2024-07-15">
+      </div>
+  
+      <div class="form-group">
+        <label class="form-label">Company Website</label>
+        <input type="url" class="form-control" placeholder="https://example.com" value="https://techsolutions.com">
+      </div>
+  
+      <div class="form-group">
+        <label class="form-label">Contact Email</label>
+        <input type="email" class="form-control" placeholder="hr@example.com" value="careers@techsolutions.com">
+      </div>
+  
+      <div class="form-group logo-upload">
+        <label class="form-label">Company Logo</label>
+        <div class="file-input-wrapper">
+          <button class="file-input-label">Choose Logo File</button>
+          <input type="file" id="logo-upload" accept="image/*">
+        </div>
+        
+        <div class="logo-preview" id="logo-preview">
+          <div class="placeholder">No logo selected</div>
+        </div>
+      </div>
+  
+      <div class="form-actions">
+        <button class="btn btn-primary">Save Changes</button>
+        <button class="btn btn-danger">Delete Post</button>
+      </div>
+    </div>
+    
+    <script src="./navbar.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
