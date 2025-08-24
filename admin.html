@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - CareerConnect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+    <header>
+        <div><strong>CareerConnect Admin</strong></div>
+        <div class="right-side">
+            <nav>
+                <a href="../homepage.html">Back to Site</a>
+            </nav>
+            <div class="avatar" style="width: 32px; height: 32px; background: #ccc; border-radius: 50%;"></div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="title">Admin Dashboard</h1>
+
+        <div class="stats">
+            <div class="card">
+                <div>Total Users</div>
+                <h2>128</h2>
+            </div>
+            <div class="card">
+                <div>Job Seekers</div>
+                <h2>94</h2>
+            </div>
+            <div class="card">
+                <div>Employers</div>
+                <h2>34</h2>
+            </div>
+            <div class="card">
+                <div>Blocked Users</div>
+                <h2>5</h2>
+            </div>
+        </div>
+
+        <div class="admin-controls">
+            <div class="search-bar">
+                <input type="text" id="userSearch" placeholder="Search users...">
+                <select id="statusFilter">
+                    <option value="all">All Statuses</option>
+                    <option value="active">Active</option>
+                    <option value="pending">Pending</option>
+                    <option value="blocked">Blocked</option>
+                </select>
+                <select id="roleFilter">
+                    <option value="all">All Roles</option>
+                    <option value="seeker">Job Seekers</option>
+                    <option value="employer">Employers</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="section-title">User Management</div>
+
+        <div class="card">
+            <div class="card-body">
+                <table id="usersTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Registration Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1001</td>
+                            <td>Sarah Johnson</td>
+                            <td>sarah@example.com</td>
+                            <td>Job Seeker</td>
+                            <td><span class="status active">Active</span></td>
+                            <td>Jul 15, 2024</td>
+                            <td class="actions">
+                                <button class="btn-block" onclick="toggleBlock(1001, this)">Block</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1002</td>
+                            <td>Tech Solutions Inc.</td>
+                            <td>hr@techsolutions.com</td>
+                            <td>Employer</td>
+                            <td><span class="status active">Active</span></td>
+                            <td>Jul 10, 2024</td>
+                            <td class="actions">
+                                <button class="btn-block" onclick="toggleBlock(1002, this)">Block</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1003</td>
+                            <td>Michael Brown</td>
+                            <td>michael@example.com</td>
+                            <td>Job Seeker</td>
+                            <td><span class="status pending">Pending</span></td>
+                            <td>Jul 22, 2024</td>
+                            <td class="actions">
+                                <button class="btn-approve" onclick="approveUser(1003, this)">Approve</button>
+                                <button class="btn-block" onclick="toggleBlock(1003, this)">Block</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1004</td>
+                            <td>DataWorks LLC</td>
+                            <td>info@dataworks.com</td>
+                            <td>Employer</td>
+                            <td><span class="status blocked">Blocked</span></td>
+                            <td>Jun 30, 2024</td>
+                            <td class="actions">
+                                <button class="btn-unblock" onclick="toggleBlock(1004, this)">Unblock</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1005</td>
+                            <td>Emily Chen</td>
+                            <td>emily@example.com</td>
+                            <td>Job Seeker</td>
+                            <td><span class="status active">Active</span></td>
+                            <td>Jul 18, 2024</td>
+                            <td class="actions">
+                                <button class="btn-block" onclick="toggleBlock(1005, this)">Block</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <a href="#">&lt;</a>
+            <span class="active">1</span>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">&gt;</a>
+        </div>
+    </div>
+
+    <script>
+        // Sample user data
+        const users = [
+            { id: 1001, name: "Sarah Johnson", email: "sarah@example.com", role: "Job Seeker", status: "active", regDate: "Jul 15, 2024" },
+            { id: 1002, name: "Tech Solutions Inc.", email: "hr@techsolutions.com", role: "Employer", status: "active", regDate: "Jul 10, 2024" },
+            { id: 1003, name: "Michael Brown", email: "michael@example.com", role: "Job Seeker", status: "pending", regDate: "Jul 22, 2024" },
+            { id: 1004, name: "DataWorks LLC", email: "info@dataworks.com", role: "Employer", status: "blocked", regDate: "Jun 30, 2024" },
+            { id: 1005, name: "Emily Chen", email: "emily@example.com", role: "Job Seeker", status: "active", regDate: "Jul 18, 2024" }
+        ];
+
+        // Search and filter functionality
+        document.getElementById('userSearch').addEventListener('input', filterUsers);
+        document.getElementById('statusFilter').addEventListener('change', filterUsers);
+        document.getElementById('roleFilter').addEventListener('change', filterUsers);
+
+        function filterUsers() {
+            const searchText = document.getElementById('userSearch').value.toLowerCase();
+            const statusFilter = document.getElementById('statusFilter').value;
+            const roleFilter = document.getElementById('roleFilter').value;
+            
+            const rows = document.querySelectorAll('#usersTable tbody tr');
+            
+            rows.forEach(row => {
+                const name = row.cells[1].textContent.toLowerCase();
+                const email = row.cells[2].textContent.toLowerCase();
+                const role = row.cells[3].textContent.toLowerCase();
+                const status = row.cells[4].querySelector('.status').classList[1];
+                
+                const matchesSearch = name.includes(searchText) || email.includes(searchText);
+                const matchesStatus = statusFilter === 'all' || status === statusFilter;
+                const matchesRole = roleFilter === 'all' || 
+                                  (roleFilter === 'seeker' && role.includes('seeker')) ||
+                                  (roleFilter === 'employer' && role.includes('employer'));
+                
+                if (matchesSearch && matchesStatus && matchesRole) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Toggle user block status
+        function toggleBlock(userId, button) {
+            const row = button.closest('tr');
+            const statusCell = row.cells[4];
+            const statusSpan = statusCell.querySelector('.status');
+            
+            if (statusSpan.classList.contains('blocked')) {
+                statusSpan.classList.remove('blocked');
+                statusSpan.classList.add('active');
+                statusSpan.textContent = 'Active';
+                button.textContent = 'Block';
+                button.className = 'btn-block';
+                
+                // Update stats
+                document.querySelectorAll('.stats .card h2')[3].textContent = 
+                    parseInt(document.querySelectorAll('.stats .card h2')[3].textContent) - 1;
+            } else {
+                statusSpan.classList.remove('active', 'pending');
+                statusSpan.classList.add('blocked');
+                statusSpan.textContent = 'Blocked';
+                button.textContent = 'Unblock';
+                button.className = 'btn-unblock';
+                
+                // Remove approve button if exists
+                const approveBtn = row.querySelector('.btn-approve');
+                if (approveBtn) approveBtn.remove();
+                
+                // Update stats
+                document.querySelectorAll('.stats .card h2')[3].textContent = 
+                    parseInt(document.querySelectorAll('.stats .card h2')[3].textContent) + 1;
+            }
+        }
+
+        // Approve pending user
+        function approveUser(userId, button) {
+            const row = button.closest('tr');
+            const statusCell = row.cells[4];
+            const statusSpan = statusCell.querySelector('.status');
+            
+            statusSpan.classList.remove('pending');
+            statusSpan.classList.add('active');
+            statusSpan.textContent = 'Active';
+            
+            button.remove();
+        }
+    </script>
+    <script src="./footer.js"></script>
+</body>
+</html>
