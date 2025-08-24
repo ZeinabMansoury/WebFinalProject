@@ -926,6 +926,22 @@ nav a:hover {
       box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
     }
 
+    .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .skill-tag {
+            background: #eef4ff;
+            color: #4a6cf7;
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
     /* edit job */
     .edit-job-container {
       max-width: 800px;
